@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LG Da GAWD</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --button-bg: #ff0080;
+      --button-hover-bg: #ff3399;
+      --button-text: white;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Urbanist', sans-serif;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      height: 100%;
+    }
+
+    body::before {
+      content: "";
+      background: url('background.jpg') center center / cover no-repeat fixed;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    .background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.3);
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 3rem 1rem;
+    }
+
+    img.profile {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #1DB954;
+      object-fit: cover;
+      margin: 1rem auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #ff0080;
+    }
+
+    a.button {
+      display: block;
+      background: var(--button-bg);
+      color: var(--button-text);
+      padding: 1rem;
+      margin: 1rem auto;
+      width: 80%;
+      max-width: 300px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+    }
+
+    a.button:hover {
+      background: var(--button-hover-bg);
+    }
+
+    .popup-img {
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      top: 10%;
+      left: 10%;
+      display: none;
+      z-index: 99;
+      pointer-events: none;
+    }
+
+    /* Music Button */
+    #musicBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background: #1DB954;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <video class="background" autoplay muted loop playsinline preload="auto">
+    <source src="background.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Main Content -->
+  <div class="content">
+    <img class="profile" src="profile.jpg" alt="LG Da GAWD Artwork" />
+    <h1>LG Da GAWD</h1>
+    <p>🔥 New drop out now — tap in!</p>
+
+    <a class="button music-trigger" href="https://open.spotify.com/track/6TvQiPsYoUHDudosVyr38b?si=6fa842e5652f4328" target="_blank">🎧 Listen on Spotify</a>
+    <a class="button music-trigger" href="https://on.soundcloud.com/ztEd6Yb366JUSLAS7" target="_blank">🔊 Play on SoundCloud</a>
+    <a class="button music-trigger" href="https://youtu.be/_Q64Dy0Ounw?si=lu914vu-lIZ9y5ad" target="_blank">📺 Watch on YouTube</a>
+
+    <br/><br/>
+    <p>Follow me:</p>
+    <a class="button music-trigger" href="https://instagram.com/YT_callme_LG" target="_blank">📷 Instagram</a>
+    <a class="button music-trigger" href="https://www.tiktok.com/@Anima.deos" target="_blank">🎵 TikTok</a>
+    <a class="button music-trigger" href="https://www.youtube.com/@4channelTV" target="_blank">📺 YouTube Channel</a>
+  </div>
+
+  <!-- Popup PNG Bot -->
+  <img src="popup.png" alt="Popup" class="popup-img" id="popupBot">
+
+  <!-- Music Button -->
+  <button id="musicBtn">🔊 Play Music</button>
+  <audio id="bgMusic" src="music.mp3" loop></audio>
+
+  <script>
+    const popup = document.getElementById("popupBot");
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    let isPlaying = false;
+
+    function showPopup() {
+      const top = Math.random() * 70 + 10;
+      const left = Math.random() * 80 + 10;
+      popup.style.top = `${top}%`;
+      popup.style.left = `${left}%`;
+      popup.style.display = "block";
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 3000);
+    }
+
+    setInterval(() => {
+      showPopup();
+    }, 10000);
+
+    // Toggle music play/pause
+    musicBtn.addEventListener("click", () => {
+      if (!isPlaying) {
+        music.play();
+        musicBtn.textContent = "⏸️ Pause Music";
+        isPlaying = true;
+      } else {
+        music.pause();
+        musicBtn.textContent = "🔊 Play Music";
+        isPlaying = false;
+      }
+    });
+
+    // Start music on any button click
+    const triggers = document.querySelectorAll(".music-trigger");
+    triggers.forEach(link => {
+      link.addEventListener("click", () => {
+        if (!isPlaying) {
+          music.play();
+          musicBtn.textContent = "⏸️ Pause Music";
+          isPlaying = true;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
